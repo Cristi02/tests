@@ -1,4 +1,12 @@
 import { useState, useEffect } from "react";
+import {
+    squaredRoot,
+    power,
+    division,
+    multiply,
+    sum,
+    difference,
+} from "../operations";
 import "./calculator.css";
 
 // const operations = ["√"];
@@ -58,10 +66,28 @@ const Calculator = () => {
         const numbers = [...history.matchAll(/[\d.]+/g)];
         numbers.push(+currentInputedValue);
         const operation = history[history.length - 1];
-
         switch (operation) {
+            case "√":
+                setCurrentInputedValue(squaredRoot(numbers[0]));
+                break;
+            case "^":
+                setCurrentInputedValue(power(numbers[0], numbers[1]));
+                break;
+            case "÷":
+                setCurrentInputedValue(division(numbers[0], numbers[1]));
+                break;
+            case "×":
+                setCurrentInputedValue(multiply(numbers[0], numbers[1]));
+                break;
+            case "+":
+                setCurrentInputedValue(sum(numbers[0], numbers[1]));
+                break;
+            case "−":
+                setCurrentInputedValue(difference(numbers[0], numbers[1]));
+                break;
+            default:
+                break;
         }
-
         setSolved(solved);
     };
 
